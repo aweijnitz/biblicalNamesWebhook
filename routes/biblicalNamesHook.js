@@ -2,7 +2,6 @@
 const os = require('os');
 const util = require('util');
 const fs = require('fs');
-const qr = require('qr-image');
 
 
 /**

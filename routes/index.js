@@ -8,7 +8,7 @@ const logger = log4js.getLogger("index");
 
 
 // Load route handlers (doubling as rudimentary MVC controllers)
-const qrCodeGenerator = require('./biblicalNamesHook.js');
+const biblicalnameshook = require('./biblicalNamesHook.js');
 
 // Remember, in Express 4, '/' is the root under which this route is mounted, so does not
 // necessarily correspond to the absolute root of the domain.
@@ -19,7 +19,7 @@ router.get('/', function(req, res) {
 });
 
 
-router.get('/qr', qrCodeGenerator(appConf, log4js));
+router.get('/webhook', biblicalnameshook(appConf, log4js));
 
 
 module.exports = router;

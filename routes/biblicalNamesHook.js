@@ -21,10 +21,32 @@ const isDefined = function (str) {
  */
 const handleReq = function(appConf, log4js) {
     const logger = log4js.getLogger("biblicalNameHook");
+    const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
 
     return function webhook (req, res) {
         //const url = 'http://' + (req.query.url || 'no-url-defined');
-        res.json({ msg: 'Hello World!' }).end();
+        // Parse params from the webhook verification request
+        let mode = req.query['hub.mode'];
+        let token = req.query['hub.verify_token'];
+        let challenge = req.query['hub.challenge'];
+
+        // Check if a token and mode were sent
+        if (mode && token) {
+
+            // Check the mode and token sent are correct
+            if (mode === 'subscribe' && token === VERIFY_TOKEN) {
+
+                // Respond with 200 OK and challenge token from the request
+                logger.info('WEBHOOK_VERIFIED');
+                res.status(200).send(challenge).end();
+
+            } else {
+                // Responds with '403 Forbidden' if verify tokens do not match
+                res.sendStatus(403);
+            }
+        }
+        //res.json({ msg: 'Hello World!' }).end();
     };
 };
 

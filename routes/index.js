@@ -13,13 +13,13 @@ const biblicalnameshook = require('./biblicalNamesHook.js');
 // Remember, in Express 4, '/' is the root under which this route is mounted, so does not
 // necessarily correspond to the absolute root of the domain.
 //
-router.get('/', function(req, res) {
+router.get('/biblicalnamesbot', function(req, res) {
   logger.debug('Serving / --> index.hjs');
   res.render('index', { title: 'Biblical Names Webhook' });
 });
 
 
-router.get('/webhook', biblicalnameshook(appConf, log4js));
+router.get('/biblicalnamesbot/webhook', biblicalnameshook(appConf, log4js));
 
 
 module.exports = router;

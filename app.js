@@ -1,21 +1,24 @@
-var appConf = require('./conf/appConfig.json');
-var express = require('express');
-var path = require('path');
-var favicon = require('static-favicon');
-var util = require('util');
+const appConf = require('./conf/appConfig.json');
+const express = require('express');
+const path = require('path');
+const favicon = require('static-favicon');
+const util = require('util');
 const bodyParser = require('body-parser');
 
-var log4js = require('log4js');
+const log4js = require('log4js');
 log4js.configure('./conf/log4js.json');
-var logger = log4js.getLogger('app');
+const logger = log4js.getLogger('app');
 
+const Bot = require('facebook-messenger-bot').Bot;
+const Elements = require('facebook-messenger-bot').Elements;
 
-var setupServer = function setupServer(appConf, logger) {
-    var app = express();
+const setupServer = function setupServer(appConf, logger) {
+    let app = express();
     app.use(bodyParser.json());
 
     logger.info('Configuring server ');
     logger.warn('SERVER IN MODE: ' + app.get('env'));
+
 
 
     logger.info('Configuring view engine');
@@ -26,24 +29,38 @@ var setupServer = function setupServer(appConf, logger) {
 
     logger.info('Configuring logging engine');
     if (app.get('env') === 'development') {
-        var devFormat = ':method :url - Status: :status Content-length: :content-length';
+        let devFormat = ':method :url - Status: :status Content-length: :content-length';
         app.use(log4js.connectLogger(log4js.getLogger("http"), { format: devFormat, level: 'auto' }));
     } else
         app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
 
 
-    var webroot = appConf.app.webroot || path.join(__dirname, 'public');
+    const webroot = appConf.app.webroot || path.join(__dirname, 'public');
     logger.info('Setting webroot to ' + webroot);
     app.use(express.static(webroot));
 
 
     logger.info('Setting application routes');
-    var routes = require('./routes/index');
+    const routes = require('./routes/index');
     app.use('/', routes);
+
+    logger.info('Setting up Messenger Bot webhook');
+
+    const bot = new Bot(process.env.PAGE_TOKEN, process.env.VERIFY_TOKEN);
+    bot.on('message', async message => {
+        const {sender} = message;
+        await sender.fetch('first_name');
+
+        const out = new Elements();
+        out.add({text: `hey ${sender.first_name}, how are you!`});
+
+        await bot.send(sender.id, out);
+    });
+    app.use('biblicalnamesbot/webhook', bot.router());
 
 /// catch 404 and forwarding to error handler
     app.use(function (req, res, next) {
-        var err = new Error('Not Found');
+        let err = new Error('Not Found');
         err.status = 404;
         next(err);
     });

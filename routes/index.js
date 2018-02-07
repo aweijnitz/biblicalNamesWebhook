@@ -20,8 +20,8 @@ router.get('/biblicalnamesbot', function(req, res) {
 });
 
 
-router.get('/biblicalnamesbot/webhook', challengeHandler(appConf, log4js));
+//router.get('/biblicalnamesbot/webhook', challengeHandler(appConf, log4js));
 
-router.post('/biblicalnamesbot/webhook', messageHandler(appConf, log4js));
+//router.post('/biblicalnamesbot/webhook', messageHandler(appConf, log4js));
 
 module.exports = router;

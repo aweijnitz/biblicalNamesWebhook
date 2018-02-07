@@ -60,8 +60,8 @@ const setupServer = function setupServer(appConf, logger) {
 
 /// catch 404 and forwarding to error handler
     app.use(function (req, res, next) {
-        let err = new Error('Not Found');
-        err.status = 404;
+        res.status(500);
+        res.render('error', { error: err });
         next(err);
     });
 

@@ -12,7 +12,7 @@ A node.js micro service for generating QR codes with embedded URLs, passed as a 
 - Logging using [log4js](https://github.com/nomiddlename/log4js-node)
     * Config includes both rotating file and console logging
 - Application config injection
-    * Simple pattern for injecting config and logger info in modules (see `routes/biblicalNamesHook.js` for example)
+    * Simple pattern for injecting config and logger info in modules (see `routes/biblicalNamesChallengeRequestHandler.js` for example)
 - Built in form parsing with Formidable
     * Example includes file upload form
 - Example test cases 

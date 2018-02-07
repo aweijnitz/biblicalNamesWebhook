@@ -43,7 +43,7 @@ const handleReq = function (appConf, log4js) {
 
         // Checks this is an event from a page subscription
         if (body.object === 'page') {
-
+            res.status(200);
             // Iterates over each entry - there may be multiple if batched
             body.entry.forEach(function (entry) {
 
@@ -61,17 +61,18 @@ const handleReq = function (appConf, log4js) {
 
                         let reply = handleMessage(webhook_event.message);
                         logger.debug('REPLY - ' + reply);
-                        res.status(200).send(reply);
+                        res.send(reply);
                     }
                 }
             );
 
             // Returns a '200 OK' response to all requests
-            res.status(200).send('EVENT_RECEIVED');
+            res.send('EVENT_RECEIVED');
         } else {
             // Returns a '404 Not Found' if event is not from a page subscription
             res.sendStatus(404);
         }
+        res.end();
     };
 };
 

@@ -59,7 +59,7 @@ const setupServer = function setupServer(appConf, logger) {
     app.use('biblicalnamesbot/webhook', bot.router());
 
 /// catch 404 and forwarding to error handler
-    app.use(function (req, res, next) {
+    app.use(function (err, req, res, next) {
         res.status(500);
         res.render('error', { error: err });
         next(err);

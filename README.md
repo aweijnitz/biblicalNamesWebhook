@@ -1,31 +1,25 @@
-# QRCodeService.js
-A node.js micro service for generating QR codes with embedded URLs, passed as a query parameter.
+# Biblical Names Chatbot Webhook
+A simple webhook used for learning about Facebook Messenger Chatbots, written in Node.js.
 
-*Use*
-[localhost:8080?url=abc.de](http://localhost:8080?url=abc.de)
+*Endpoints*
+- Web [localhost:3939/biblicalnamesbot](http://localhost:3939/biblicalnamesbot)
+- Webhook [localhost/biblicalnamesbot/webhook](http://localhost/biblicalnamesbot/webhook)
+
+See [https://developers.facebook.com/docs/messenger-platform](https://developers.facebook.com/docs/messenger-platform)
 
 *Features*
-- Generate QR code as SVG (using package qr-image)
-- Application life-cycle management
-    * Pre-start setup hook
-    * Shutdown hook on 'SIGINT' and 'SIGTERM' for pre-exit cleanup or data saving.
-- Logging using [log4js](https://github.com/nomiddlename/log4js-node)
-    * Config includes both rotating file and console logging
-- Application config injection
-    * Simple pattern for injecting config and logger info in modules (see `routes/biblicalNamesChallengeRequestHandler.js` for example)
-- Built in form parsing with Formidable
-    * Example includes file upload form
-- Example test cases 
-    * Using [Mocha](http://visionmedia.github.io/mocha/) and [Should](https://github.com/visionmedia/should.js/)
+- Reply to the Fabebook App Challenge request
+- Process incoming messages from the chatbot
 
 ## Install
 First clone/save this repo
 
-    cd QRCodeService.js
     mkdir logs
-	npm install
+    npm install
+
 ## Run
 	npm start
+
 ## Run tests
 	npm test
 	

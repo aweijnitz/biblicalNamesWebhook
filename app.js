@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
 var util = require('util');
-
+const bodyParser = require('body-parser');
 
 var log4js = require('log4js');
 log4js.configure('./conf/log4js.json');
@@ -12,6 +12,7 @@ var logger = log4js.getLogger('app');
 
 var setupServer = function setupServer(appConf, logger) {
     var app = express();
+    app.use(bodyParser.json());
 
     logger.info('Configuring server ');
     logger.warn('SERVER IN MODE: ' + app.get('env'));

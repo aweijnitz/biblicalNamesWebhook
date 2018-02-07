@@ -25,6 +25,8 @@ const handleReq = function (appConf, log4js) {
     return function webhook(req, res) {
         let body = req.body;
 
+	//logger.info(util.inspect(req.body));
+
         // Checks this is an event from a page subscription
         if (body.object === 'page') {
 
@@ -34,7 +36,10 @@ const handleReq = function (appConf, log4js) {
                 // Gets the message. entry.messaging is an array, but
                 // will only ever contain one message, so we get index 0
                 let webhook_event = entry.messaging[0];
-                console.log(webhook_event);
+                logger.debug(webhook_event);
+
+		let nlp = webhook_event.message.nlp;
+		logger.debug(util.inspect(nlp, { showHidden: false, depth: 5, colors: true }));
             });
 
             // Returns a '200 OK' response to all requests

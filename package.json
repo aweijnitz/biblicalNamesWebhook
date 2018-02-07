@@ -17,6 +17,7 @@
   ],
   "author": "Anders Weijnitz",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "~4.16.0",
     "formidable": "^1.0.15",
     "hjs": "~0.0.6",

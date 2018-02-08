@@ -11,6 +11,8 @@ const logger = log4js.getLogger('app');
 
 const Bot = require('facebook-messenger-bot').Bot;
 const Elements = require('facebook-messenger-bot').Elements;
+const messageHandler = require('./routes/messageHandler');
+
 
 const setupServer = function setupServer(appConf, logger) {
     let app = express();
@@ -51,8 +53,12 @@ const setupServer = function setupServer(appConf, logger) {
         const {sender} = message;
         await sender.fetch('first_name');
 
+        logger.debug(util.inspect(message));
+        logger.debug(util.inspect(sender));
+
+        let reply = messageHandler(message, sender);
         const out = new Elements();
-        out.add({text: `hey ${sender.first_name}, how are you!`});
+        out.add({text: reply});
 
         await bot.send(sender.id, out);
     });
@@ -88,6 +94,7 @@ const setupServer = function setupServer(appConf, logger) {
             error: {}
         });
     });
+
 
     return app;
 };

@@ -56,7 +56,7 @@ const setupServer = function setupServer(appConf, logger) {
 
         await bot.send(sender.id, out);
     });
-    app.use('/webhook', bot.router());
+    app.use('webhook', bot.router());
 
 /// catch 404 and forwarding to error handler
     app.use(function (err, req, res, next) {

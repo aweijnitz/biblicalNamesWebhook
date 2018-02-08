@@ -51,10 +51,10 @@ const setupServer = function setupServer(appConf, logger) {
     const bot = new Bot(process.env.PAGE_TOKEN, process.env.VERIFY_TOKEN);
     bot.on('message', async message => {
 
-        logger.debug(util.inspect(message));
-
         // Only react if we actually a text message
         if(!!message.text) {
+            logger.debug(util.inspect(message));
+
             const {sender} = message;
             await sender.fetch('first_name');
 

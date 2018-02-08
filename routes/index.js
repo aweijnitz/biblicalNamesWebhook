@@ -24,6 +24,12 @@ router.get('/privacy', function(req, res) {
     res.render('privacypolicy', { title: 'Biblical Names Privacy Policy' });
 });
 
+router.get('/tos', function(req, res) {
+    logger.debug('Serving / --> tos.hjs');
+    res.render('tos', { title: 'Biblical Names Terms of Service' });
+});
+
+
 //router.get('/biblicalnamesbot/webhook', challengeHandler(appConf, log4js));
 
 //router.post('/biblicalnamesbot/webhook', messageHandler(appConf, log4js));

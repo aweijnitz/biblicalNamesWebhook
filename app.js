@@ -52,7 +52,7 @@ const setupServer = function setupServer(appConf, logger) {
     bot.on('message', async message => {
 
         // Only react if we actually a text message
-        if(!!message.text) {
+        if(!!message.text && !(!!message.is_echo && message.is_echo === true)) {
             logger.debug(util.inspect(message));
 
             const {sender} = message;

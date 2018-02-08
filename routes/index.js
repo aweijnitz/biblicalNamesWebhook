@@ -19,6 +19,10 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Biblical Names Webhook' });
 });
 
+router.get('/privacy', function(req, res) {
+    logger.debug('Serving / --> privacypolicy.hjs');
+    res.render('privacypolicy', { title: 'Biblical Names Privacy Policy' });
+});
 
 //router.get('/biblicalnamesbot/webhook', challengeHandler(appConf, log4js));
 

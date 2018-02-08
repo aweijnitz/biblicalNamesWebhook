@@ -50,17 +50,21 @@ const setupServer = function setupServer(appConf, logger) {
 
     const bot = new Bot(process.env.PAGE_TOKEN, process.env.VERIFY_TOKEN);
     bot.on('message', async message => {
-        const {sender} = message;
-        await sender.fetch('first_name');
 
         logger.debug(util.inspect(message));
-        logger.debug(util.inspect(sender));
 
-        let reply = messageHandler(message, sender);
-        const out = new Elements();
-        out.add({text: reply});
+        // Only react if we actually a text message
+        if(!!message.text) {
+            const {sender} = message;
+            await sender.fetch('first_name');
 
-        await bot.send(sender.id, out);
+            let reply = messageHandler(message, sender);
+            const out = new Elements();
+            out.add({text: reply});
+
+            await bot.send(sender.id, out);
+        }
+
     });
     app.use('/webhook', bot.router());
 

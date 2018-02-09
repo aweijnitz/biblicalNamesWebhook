@@ -59,7 +59,7 @@ const setupServer = function setupServer(appConf, logger) {
 
             let reply = await messageHandler(message, sender);
             const out = new Elements();
-            out.add({text: JSON.stringify(reply)});
+            out.add({text: JSON.stringify(reply.entities.contact[0])});
             let dummy = await bot.send(sender.id, out);
         }
 

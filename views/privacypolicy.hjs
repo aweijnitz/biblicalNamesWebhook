@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-md-12">
             <h3>All your <i>public</i> data are belong to us!</h3>
-            <p>Not really. We are however saving usage statistics based on public user data for analytics and debugging purposes.</p>
+            <p>Not really. We are however storing usage statistics based on public profile data. It is used for for analytics and debugging purposes.</p>
         </div>
     </div>
     <div class="row">

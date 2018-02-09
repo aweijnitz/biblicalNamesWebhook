@@ -21,9 +21,11 @@
     "express": "~4.16.0",
     "facebook-messenger-bot": "0.2.0",
     "formidable": "^1.0.15",
+    "get-routes": "^0.2.0",
     "hjs": "~0.0.6",
     "hogan.js": "^3.0.2",
     "log4js": "^0.6.16",
+    "node-wit": "^5.0.0",
     "promised-io": "^0.3.4",
     "static-favicon": "~1.0.0"
   },

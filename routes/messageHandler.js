@@ -3,6 +3,9 @@ const os = require('os');
 const util = require('util');
 const fs = require('fs');
 
+const {Wit, log} = require('node-wit');
+
+
 
 /**
  * Private helper to sanity check a string before using it.
@@ -15,5 +18,12 @@ const isDefined = function (str) {
 
 module.exports = function messageHandler(message, sender) {
 
-    return `hey ${sender.first_name}, how are you!`;
+    const client = new Wit({
+        accessToken: 'DEK5LYCA2JTYEX43EBVJSNKG5JNPX6X4',
+        logger: new log.Logger(log.DEBUG) // optional
+    });
+
+
+    return client.message(message, {});
+
 };

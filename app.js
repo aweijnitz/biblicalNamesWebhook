@@ -22,7 +22,6 @@ const setupServer = function setupServer(appConf, logger) {
     logger.warn('SERVER IN MODE: ' + app.get('env'));
 
 
-
     logger.info('Configuring view engine');
     app.set('views', path.join(__dirname, 'views'));
     app.set('view engine', 'hjs');
@@ -32,9 +31,9 @@ const setupServer = function setupServer(appConf, logger) {
     logger.info('Configuring logging engine');
     if (app.get('env') === 'development') {
         let devFormat = ':method :url - Status: :status Content-length: :content-length';
-        app.use(log4js.connectLogger(log4js.getLogger("http"), { format: devFormat, level: 'auto' }));
+        app.use(log4js.connectLogger(log4js.getLogger("http"), {format: devFormat, level: 'auto'}));
     } else
-        app.use(log4js.connectLogger(log4js.getLogger("http"), { level: 'auto' }));
+        app.use(log4js.connectLogger(log4js.getLogger("http"), {level: 'auto'}));
 
 
     const webroot = appConf.app.webroot || path.join(__dirname, 'public');
@@ -51,18 +50,17 @@ const setupServer = function setupServer(appConf, logger) {
     const bot = new Bot(process.env.PAGE_TOKEN, process.env.VERIFY_TOKEN);
     bot.on('message', async message => {
 
-        // Only react if we actually a text message
-        if(!!message.text && !(!!message.is_echo && message.is_echo === true)) {
+        // Only react if we actually received a text message
+        if (!!message.text && !(!!message.is_echo && message.is_echo === true)) {
             logger.debug(util.inspect(message));
 
             const {sender} = message;
             await sender.fetch('first_name');
 
-            let reply = messageHandler(message, sender);
+            let reply = await messageHandler(message, sender);
             const out = new Elements();
-            out.add({text: reply});
-
-            await bot.send(sender.id, out);
+            out.add({text: JSON.stringify(reply)});
+            let dummy = await bot.send(sender.id, out);
         }
 
     });
@@ -71,7 +69,7 @@ const setupServer = function setupServer(appConf, logger) {
 /// catch 404 and forwarding to error handler
     app.use(function (err, req, res, next) {
         res.status(500);
-        res.render('error', { error: err });
+        res.render('error', {error: err});
         next(err);
     });
 

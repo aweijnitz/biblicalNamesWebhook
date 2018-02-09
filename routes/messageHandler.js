@@ -24,6 +24,6 @@ module.exports = function messageHandler(message, sender) {
     });
 
 
-    return client.message(message, {});
+    return client.message(message.text, {});
 
 };

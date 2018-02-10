@@ -50,16 +50,14 @@ const setupServer = function setupServer(appConf, logger) {
     const bot = new Bot(process.env.PAGE_TOKEN, process.env.VERIFY_TOKEN);
     bot.on('message', async message => {
 
-        // Only react if we actually received a text message
         if (!!message.text && !(!!message.is_echo && message.is_echo === true)) {
-            logger.debug(util.inspect(message));
+            logger.debug('Received ' + util.inspect(message, { showHidden: false, depth: 5 }));
 
             const {sender} = message;
             await sender.fetch('first_name');
 
             let reply = await messageHandler(message, sender);
             const out = new Elements();
-            
             out.add({text: reply});
             let dummy = await bot.send(sender.id, out);
         }

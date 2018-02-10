@@ -1,11 +1,21 @@
 const {Wit, log} = require('node-wit');
 
-module.exports = function messageHandler(message, sender) {
+
+function generatePersonFactReply(replyObj) {
+    if (replyObj.confidence > 0.85)
+        return replyObj.value;
+    else
+        return ":-/ I am not sure I understood correctly. Did you ask about " + replyObj.value + "?";
+}
+
+module.exports = async function messageHandler(message, sender) {
 
     const client = new Wit({
         accessToken: process.env.WIT_AI_APP_TOKEN,
         logger: new log.Logger(log.DEBUG) // optional
     });
 
-    return client.message(message.text, {});
+    let replyObj = await client.message(message.text, {});
+
+    return generatePersonFactReply(replyObj.entities.contact[0]);
 };

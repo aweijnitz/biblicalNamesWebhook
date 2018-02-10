@@ -32,7 +32,7 @@ function lookupPersonFact(personName = '') {
             reply = 'I am sorry. There is no one named ' + personName + ' in the Old Testament that I know of. :-/';
 
     } else if (results.length === 1) {
-        reply = "FOUND! " + personName;
+        reply = facts[personName];
     } else if (results.length > 1 && results.length <= 5) {
         let persons = '';
         results.forEach((name) => {

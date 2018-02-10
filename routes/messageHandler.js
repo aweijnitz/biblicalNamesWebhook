@@ -5,7 +5,7 @@ const FACTS_FILE = path.resolve('./conf/generated-nameFacts.json');
 const SEARCH_INDEX_FILE = path.resolve('./conf/generated-searchIndex.json');
 
 const fulltextsearchlight = require('full-text-search-light');
-const facts = fs.readFileSync(FACTS_FILE);
+const facts = JSON.parse(fs.readFileSync(FACTS_FILE, 'utf8'));
 const searchIndex = fulltextsearchlight.loadSync(SEARCH_INDEX_FILE);
 
 function about() {

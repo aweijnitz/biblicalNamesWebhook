@@ -39,8 +39,8 @@ function lookupPersonFact(personName = '') {
             return entry[personName] !== undefined;
         });
 
-        console.log("REPLYING: " + fact);
-        reply = '' + fact;
+        console.log("REPLYING: " + fact[personName]);
+        reply = '' + fact[personName];
 
     } else if (results.length > 1 && results.length <= 5) {
 

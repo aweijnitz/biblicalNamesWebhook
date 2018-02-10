@@ -22,6 +22,7 @@
     "express": "~4.16.0",
     "facebook-messenger-bot": "0.2.0",
     "formidable": "^1.0.15",
+    "full-text-search-light": "0.0.17",
     "get-routes": "^0.2.0",
     "hjs": "~0.0.6",
     "hogan.js": "^3.0.2",

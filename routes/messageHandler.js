@@ -1,16 +1,51 @@
 const {Wit, log} = require('node-wit');
+const FACTS_FILE = '../conf/generated-nameFacts.json';
+const SEARCH_INDEX_FILE = '../conf/generated-searchIndex.json';
+
+const facts = require(FACTS_FILE);
+const searchIndex = fulltextsearchlight.loadSync(SEARCH_INDEX_FILE);
+
 
 function about() {
     return "I am a Facebook Chatbot. Anders Weijnitz built me in February 2018. For natural language processing, I am using wit.ai.";
 }
 
-function lookupPersonFact(personName) {
-    return "Looking up " + personName + "!";
+function lookupPersonFact(personName = '') {
+    let reply = 'I am sorry, I could not find anything about ' + personName + '. :-( '
+        + 'Are you sure it is a biblical name, from the Old Testament?';
+
+    if (personName.length <= 2)
+        return ':-( Please specify a name with more than two letters in it.';
+
+    let results = searchIndex.search(personName);
+    if (results.length === 0) {
+        results = searchIndex.search(personName.substr(0, 2));
+        if (results.length > 0) {
+            let persons = '';
+            results.forEach((name) => {
+                persons += name + ' ';
+            });
+            reply = 'I found more than one. Did you mean one of these? ' + persons;
+        } else
+            reply = 'I am sorry. There is no one named ' + personName + ' in the Old Testament that I know of. :-/';
+
+    } else if (results.length === 1) {
+        reply = "FOUND! " + personName;
+    } else if (results.length > 1 && results.length <= 5) {
+        let persons = '';
+        results.forEach((name) => {
+            persons += name + ' ';
+        });
+        reply = 'I found more than one. Did you mean one of these? ' + persons;
+    } else if (results.length > 5) {
+        reply = 'I found too many matches (' + results.length + ')! Could you please be more specific?';
+    }
+    return reply;
 }
 
 function generatePersonFactReply(replyObj) {
 
-    if(replyObj.value === "yourself")
+    if (replyObj.value === "yourself")
         return about();
     else if (replyObj.confidence > 0.85)
         return lookupPersonFact(replyObj.value);

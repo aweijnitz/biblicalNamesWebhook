@@ -1,1 +1,2 @@
-node ./convertCSVtoJSON.js > nameFacts.json
+#!/usr/bin/env bash
+node ./convertCSVtoJSON.js

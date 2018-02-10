@@ -9,7 +9,21 @@ See [https://developers.facebook.com/docs/messenger-platform](https://developers
 
 *Features*
 - Reply to the Fabebook App Challenge request
-- Process incoming messages from the chatbot
+- Process incoming messages from the chatbot with [wit.ai](https://wit.ai/) and lookup entity name in local "database" (json file).
+
+## Usage
+
+### Chatting
+
+![An example chat](https://github.com/aweijnitz/biblicalNamesWebhook/raw/master/doc/chat-example.png "An Example Chat")
+
+### Finding and adding the bot
+
+![Finding the bot](https://github.com/aweijnitz/biblicalNamesWebhook/raw/master/doc/FB-Messenger-finding-the-bot.png "Finding the bot")
+
+![The Bot Page](https://github.com/aweijnitz/biblicalNamesWebhook/raw/master/doc/chatbot-page-messenger.png "The Bot Page")
+
+
 
 ## Install
 First clone/save this repo

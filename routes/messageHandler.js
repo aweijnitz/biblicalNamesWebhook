@@ -6,7 +6,6 @@ const fulltextsearchlight = require('full-text-search-light');
 const facts = require(FACTS_FILE);
 const searchIndex = fulltextsearchlight.loadSync(SEARCH_INDEX_FILE);
 
-
 function about() {
     return "I am a Facebook Chatbot. Anders Weijnitz built me in February 2018. For natural language processing, I am using wit.ai.";
 }

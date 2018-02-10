@@ -61,7 +61,7 @@ function lookupPersonFact(personName = '') {
 
     } else if (results.length === 1) {
         let fact = facts.find(entry => {
-            console.log('Checking ' + personName + ' against ' + JSON.stringify(entry));
+            //console.log('Checking ' + personName + ' against ' + JSON.stringify(entry));
             return entry[personName] !== undefined;
         });
 

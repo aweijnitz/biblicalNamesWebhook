@@ -1,9 +1,11 @@
+const path = require('path');
+const fs = require('fs');
 const {Wit, log} = require('node-wit');
-const FACTS_FILE = '../conf/generated-nameFacts.json';
-const SEARCH_INDEX_FILE = '../conf/generated-searchIndex.json';
+const FACTS_FILE = path.resolve('./conf/generated-nameFacts.json');
+const SEARCH_INDEX_FILE = path.resolve('./conf/generated-searchIndex.json');
 
 const fulltextsearchlight = require('full-text-search-light');
-const facts = require(FACTS_FILE);
+const facts = fs.readFileSync(FACTS_FILE);
 const searchIndex = fulltextsearchlight.loadSync(SEARCH_INDEX_FILE);
 
 function about() {

@@ -33,7 +33,7 @@ function about() {
 function listNames() {
     let names = '';
     facts.forEach(fact => {
-        name += fact.field1 + ' ';
+        names += fact.field1 + ' ';
     });
     return names;
 }

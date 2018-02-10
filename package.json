@@ -26,6 +26,7 @@
     "get-routes": "^0.2.0",
     "hjs": "~0.0.6",
     "hogan.js": "^3.0.2",
+    "lodash.has": "^4.5.2",
     "log4js": "^0.6.16",
     "node-wit": "^5.0.0",
     "promised-io": "^0.3.4",

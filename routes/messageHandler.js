@@ -8,8 +8,32 @@ const fulltextsearchlight = require('full-text-search-light');
 const facts = JSON.parse(fs.readFileSync(FACTS_FILE, 'utf8'));
 const searchIndex = fulltextsearchlight.loadSync(SEARCH_INDEX_FILE);
 
+function isGreeting(messsage) {
+    return has(messsage, 'nlp.entities.greetings');
+}
+
+function isListCommand(message) {
+    return message.text === 'list' || message.text === 'List' || message.text === 'LIST';
+}
+
+function isHelpCommand(message) {
+    return message.text === 'help' || message.text === 'Help' || message.text === 'HELP' || message.text === '?';
+}
+
+function helpText() {
+    return 'Ask me about anyone in the Old Testament! For example, "Tell me about Ruth". Type "list" for a list of names that I know of.'
+}
+
 function about() {
     return "I am a Facebook Chatbot. Anders Weijnitz built me in February 2018. For natural language processing, I rely on wit.ai.";
+}
+
+function listNames() {
+    let names = '';
+    facts.forEach(fact => {
+        name += fact.field1 + ' ';
+    });
+    return names;
 }
 
 function lookupPersonFact(personName = '') {
@@ -68,12 +92,25 @@ function generatePersonFactReply(replyObj) {
 
 module.exports = async function messageHandler(message, sender) {
 
-    const client = new Wit({
-        accessToken: process.env.WIT_AI_APP_TOKEN,
-        logger: new log.Logger(log.DEBUG) // optional
-    });
+    if(isGreeting(message)) {
+        return 'Hello ' + sender.first_name + '! ' + helpText();
 
-    let replyObj = await client.message(message.text, {});
+    } else if(isListCommand(message)) {
+        return 'Ok, these are the names I know of: ' + listNames();
 
-    return generatePersonFactReply(replyObj.entities.contact[0]);
+    } else if(isHelpCommand(message)) {
+        return helpText();
+        
+    } else {
+        const client = new Wit({
+            accessToken: process.env.WIT_AI_APP_TOKEN,
+            logger: new log.Logger(log.DEBUG) // optional
+        });
+
+        let replyObj = await client.message(message.text, {});
+
+        return generatePersonFactReply(replyObj.entities.contact[0]);
+    }
+
+
 };

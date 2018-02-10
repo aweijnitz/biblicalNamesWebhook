@@ -5911,10 +5911,9 @@
     "Zephaniah",
     "Zerubbabel",
     "Zilpah",
-    "Zipporah",
-    ""
+    "Zipporah"
   ],
-  "data_ptr": 105,
+  "data_ptr": 104,
   "free_slots": [],
-  "single_data_counter": 105
+  "single_data_counter": 104
 }

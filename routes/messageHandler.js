@@ -9,7 +9,7 @@ const facts = fs.readFileSync(FACTS_FILE);
 const searchIndex = fulltextsearchlight.loadSync(SEARCH_INDEX_FILE);
 
 function about() {
-    return "I am a Facebook Chatbot. Anders Weijnitz built me in February 2018. For natural language processing, I am using wit.ai.";
+    return "I am a Facebook Chatbot. Anders Weijnitz built me in February 2018. For natural language processing, I rely on wit.ai.";
 }
 
 function lookupPersonFact(personName = '') {

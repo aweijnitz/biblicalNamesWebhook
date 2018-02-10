@@ -17,7 +17,11 @@ const search = new fulltextsearchlight({
 csv({noheader: true, trim: true, delimiter: ';', ignoreColumns: [2, 3, 4]})
     .fromFile(csvFilePath)
     .on('json', (jsonObj) => {
+        if (jsonObj.field1.length === 0 || jsonObj.field1.length === 0) return;
+        jsonObj[jsonObj.field1] = jsonObj.field2;
+        delete jsonObj.field2;
         csvData.push(jsonObj);
+        console.log(JSON.stringify(jsonObj));
     })
     .on('done', () => {
 //        console.log(JSON.stringify(csvData));
@@ -28,7 +32,7 @@ csv({noheader: true, trim: true, delimiter: ';', ignoreColumns: [2, 3, 4]})
 
         fs.unlinkSync(FACTS_FILE);
         fs.unlinkSync(SEARCH_INDEX_FILE);
-        fs.writeFileSync(FACTS_FILE, JSON.stringify(csvData), { encoding: 'utf8'});
+        fs.writeFileSync(FACTS_FILE, JSON.stringify(csvData), {encoding: 'utf8'});
         search.saveSync(SEARCH_INDEX_FILE);
 
     });

@@ -18,6 +18,7 @@
   "author": "Anders Weijnitz",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "csvtojson": "^1.1.9",
     "express": "~4.16.0",
     "facebook-messenger-bot": "0.2.0",
     "formidable": "^1.0.15",

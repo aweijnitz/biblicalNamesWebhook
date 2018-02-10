@@ -29,7 +29,7 @@ function lookupPersonFact(personName = '') {
             results.forEach((name) => {
                 persons += name + ' ';
             });
-            reply = 'I found more than one. Did you mean one of these? ' + persons;
+            reply = 'Not sure who you mean. Did you mean one of these? ' + persons;
         } else
             reply = 'I am sorry. There is no one named ' + personName + ' in the Old Testament that I know of. :-/';
 

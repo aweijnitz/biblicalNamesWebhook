@@ -20,7 +20,9 @@ function lookupPersonFact(personName = '') {
         return ':-( Please specify a name with more than two letters in it.';
 
     let results = searchIndex.search(personName);
+
     if (results.length === 0) {
+
         results = searchIndex.search(personName.substr(0, 2));
         if (results.length > 0) {
             let persons = '';
@@ -32,14 +34,18 @@ function lookupPersonFact(personName = '') {
             reply = 'I am sorry. There is no one named ' + personName + ' in the Old Testament that I know of. :-/';
 
     } else if (results.length === 1) {
+        console.log("REPLYING: " + facts[personName]);
         reply = facts[personName];
+
     } else if (results.length > 1 && results.length <= 5) {
+
         let persons = '';
         results.forEach((name) => {
             persons += name + ' ';
         });
         reply = 'I found more than one. Did you mean one of these? ' + persons;
     } else if (results.length > 5) {
+
         reply = 'I found too many matches (' + results.length + ')! Could you please be more specific?';
     }
     return reply;

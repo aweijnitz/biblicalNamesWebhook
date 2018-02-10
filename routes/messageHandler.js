@@ -10,7 +10,7 @@ function lookupPersonFact(personName) {
 
 function generatePersonFactReply(replyObj) {
 
-    if(reply.value === "yourself")
+    if(replyObj.value === "yourself")
         return about();
     else if (replyObj.confidence > 0.85)
         return lookupPersonFact(replyObj.value);

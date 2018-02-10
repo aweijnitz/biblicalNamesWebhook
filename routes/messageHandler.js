@@ -7,6 +7,8 @@ const SEARCH_INDEX_FILE = path.resolve('./conf/generated-searchIndex.json');
 const fulltextsearchlight = require('full-text-search-light');
 const facts = JSON.parse(fs.readFileSync(FACTS_FILE, 'utf8'));
 const searchIndex = fulltextsearchlight.loadSync(SEARCH_INDEX_FILE);
+const has = require('lodash.has');
+
 
 function isGreeting(messsage) {
     return has(messsage, 'nlp.entities.greetings');
@@ -100,7 +102,7 @@ module.exports = async function messageHandler(message, sender) {
 
     } else if(isHelpCommand(message)) {
         return helpText();
-        
+
     } else {
         const client = new Wit({
             accessToken: process.env.WIT_AI_APP_TOKEN,
